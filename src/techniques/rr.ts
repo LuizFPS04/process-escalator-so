@@ -1,29 +1,28 @@
 import { Process, Metrics } from "../types/escalatorTypes";
 
 export function rr(processes: Process[], quantum: number): Metrics {
-
     let currentTime = 0;
     let totalResponseTime = 0;
     let totalWaitingTime = 0;
     let totalTurnaroundTime = 0;
 
     const processesSize = processes.length;
-    const remainingTimes = processes.map(process => process.burstTime);
+    const remainingTimes = processes.map(p => p.burstTime); 
     const responseTimes: number[] = new Array(processesSize).fill(-1);
     const queue: number[] = [];
 
     let completedProcesses = 0;
 
-    processes.forEach((process, index) => {
-        if (process.arrivalTime === 0) queue.push(index);
+    processes.forEach((p, i) => {
+        if (p.arrivalTime === 0) queue.push(i);
     });
 
     while (completedProcesses < processesSize) {
         if (queue.length === 0) {
             currentTime++;
-            processes.forEach((process, index) => {
-                if (process.arrivalTime === currentTime && remainingTimes[index] > 0) {
-                    queue.push(index);
+            processes.forEach((p, i) => {
+                if (p.arrivalTime === currentTime && remainingTimes[i] > 0) {
+                    queue.push(i);
                 }
             });
             continue;
@@ -40,9 +39,9 @@ export function rr(processes: Process[], quantum: number): Metrics {
         remainingTimes[index] -= executionTime;
         currentTime += executionTime;
 
-        processes.forEach((process, index) => {
-            if (process.arrivalTime <= currentTime && remainingTimes[index] > 0 && !queue.includes(index) && index !== index) {
-                queue.push(index);
+        processes.forEach((p, i) => {
+            if (p.arrivalTime <= currentTime && remainingTimes[i] > 0 && !queue.includes(i) && i !== index) {
+                queue.push(i);
             }
         });
 
