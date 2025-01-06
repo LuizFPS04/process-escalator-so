@@ -20,6 +20,6 @@ Você pode rodar com: ```npm run dev```
 * src/*docs* - pasta com arquivos .txt para conversão
 * src/*types* - pasta com os tipos e interfaces utilizadas
 * src/*utils* - pasta com funções utilitárias e helpers
-* src/*techiniques* - pasta com funções lógicas de serviços para realizar os algoritmos de escalanomento
-* src/*doc-parsed* - pasta para inclusão do arquivo  .txt com os resultados
+* src/*techiniques* - pasta com funções lógicas de serviços para realizar os algoritmos de escalonamento
+* src/*doc-parsed* - pasta para inclusão do arquivo .txt com os resultados
 * src/server.ts - ponto de entrada da aplicação
